@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: "DM Sans", sans-serif;
+@layer base {
+  body {
+    @apply bg-slate-900 font-body;
+  }
+}
+
+@layer components {
+  .page_container {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .movie_list .swiper-slide {
+    width: 300px;
+  }
+  .text_height-dot {
+    max-height: 25px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .banner .swiper {
+    height: 100%;
+  }
 }
