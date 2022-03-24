@@ -29,7 +29,7 @@ function Banner() {
 }
 
 function BannerItem({ data }) {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="w-full h-full rounded-lg relative">
       <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.9)] rounded-lg"></div>

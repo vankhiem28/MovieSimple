@@ -5,6 +5,7 @@ import Header from "./components/layout/Header";
 import Main from "./components/layout/Main";
 import HomePage from "./pages/HomePage";
 import MoviesPage from "./pages/MoviesPage";
+import MovieDetails from "./pages/HomeDetailsPage";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
             }
           ></Route>
           <Route path="/movies" element={<MoviesPage></MoviesPage>}></Route>
+          <Route
+            path="/movies/:movieID"
+            element={<MovieDetails></MovieDetails>}
+          ></Route>
         </Route>
       </Routes>
       {/* </BrowserRouter> */}

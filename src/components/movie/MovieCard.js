@@ -1,7 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function MovieCard({ data }) {
   // console.log(data);
+  const navigate = useNavigate();
+
+  const handleClickNavigate = () => {
+    navigate(`/movies/${data.id}`);
+  };
 
   return (
     <div className="movie-card p-3 bg-slate-700 rounded-lg text-white">
@@ -19,7 +25,10 @@ function MovieCard({ data }) {
         <span>{new Date(data.release_date).getFullYear()}</span>
         <span>{data.vote_average}</span>
       </div>
-      <button className="w-full py-3 bg-primary rounded-lg mt-2">
+      <button
+        onClick={handleClickNavigate}
+        className="w-full py-3 bg-primary rounded-lg mt-2"
+      >
         Watch Now
       </button>
     </div>
