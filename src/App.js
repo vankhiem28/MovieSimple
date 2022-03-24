@@ -1,20 +1,30 @@
 import React from "react";
-
-import MovieCard from "./components/movie/MovieCard";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import MovieList from "./components/movie/MovieList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Banner from "./components/banner/Banner";
 import Header from "./components/layout/Header";
+import Main from "./components/layout/Main";
 import HomePage from "./pages/HomePage";
+import MoviesPage from "./pages/MoviesPage";
 
 function App() {
   return (
     <React.Fragment>
-      <Header />
-      <Banner />
-      <HomePage />
+      {/* <BrowserRouter> */}
+      <Routes>
+        <Route element={<Main></Main>}>
+          <Route
+            path="/"
+            element={
+              <>
+                <Banner></Banner>
+                <HomePage></HomePage>
+              </>
+            }
+          ></Route>
+          <Route path="/movies" element={<MoviesPage></MoviesPage>}></Route>
+        </Route>
+      </Routes>
+      {/* </BrowserRouter> */}
     </React.Fragment>
   );
 }

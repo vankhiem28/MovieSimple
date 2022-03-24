@@ -1,10 +1,21 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
     <header className="flex justify-center items-center mt-5 gap-x-2 text-gray-500">
-      <span className="text-primary">Home</span>
-      <span>Movies</span>
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? "text-primary" : "")}
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/movies"
+        className={({ isActive }) => (isActive ? "text-primary" : "")}
+      >
+        Movies
+      </NavLink>
     </header>
   );
 }
