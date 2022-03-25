@@ -14,6 +14,11 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .page_container-l {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .movie_list .swiper-slide {
     width: 300px;
   }
@@ -26,5 +31,10 @@
   }
   .banner .swiper {
     height: 100%;
+  }
+  .page_container-sm {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
