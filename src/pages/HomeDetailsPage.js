@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
+import { SwiperSlide, Swiper } from "swiper/react";
 import useSWR from "swr";
+import MovieCard from "../components/movie/MovieCard";
+
 import { fetcher, keyApi } from "../config";
 
 function HomeDetailsPage() {
@@ -50,6 +53,7 @@ function HomeDetailsPage() {
       </h2>
       <Casts></Casts>
       <Trailer />
+      <MovieSimilar />
     </Fragment>
   );
 }
@@ -119,6 +123,37 @@ function Trailer() {
             // className="w-full h-full object-cover"
           ></iframe>
         ))}
+      </div>
+    </Fragment>
+  );
+}
+
+function MovieSimilar() {
+  const { movieID } = useParams();
+  const { data, error } = useSWR(
+    // `https://api.themoviedb.org/3/movie/${movieID}?api_key=${keyApi}`,
+    // `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${keyApi}`,
+    `https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=${keyApi}`,
+    fetcher
+  );
+  if (!data) return null;
+  const { results } = data;
+  if (!results || results.length < 0) return null;
+
+  return (
+    <Fragment>
+      <h2 className="text-center text-white text-4xl font-bold mt-10 mb-5">
+        Similar Movie
+      </h2>
+      <div className="movie_list page_container-l">
+        <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={"auto"}>
+          {results.length > 0 &&
+            results.map((movie) => (
+              <SwiperSlide key={movie.id}>
+                <MovieCard data={movie}></MovieCard>
+              </SwiperSlide>
+            ))}
+        </Swiper>
       </div>
     </Fragment>
   );
