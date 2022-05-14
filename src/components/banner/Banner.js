@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/scss";
 import useSWR from "swr";
 import { fetcher } from "../../config";
+import Button from "../button/Button";
 
 function Banner() {
+  const navigate = useNavigate();
   const { data, error } = useSWR(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=b8cc1f2a76c54c51545b0078bdde8a3c`,
     fetcher
@@ -20,7 +23,7 @@ function Banner() {
         {movies.length > 0 &&
           movies.map((movie) => (
             <SwiperSlide>
-              <BannerItem data={movie}></BannerItem>
+              <BannerItem data={movie} navigate={navigate}></BannerItem>
             </SwiperSlide>
           ))}
       </Swiper>
@@ -28,8 +31,7 @@ function Banner() {
   );
 }
 
-function BannerItem({ data }) {
-  // console.log(data);
+function BannerItem({ data, navigate }) {
   return (
     <div className="w-full h-full rounded-lg relative">
       <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.9)] rounded-lg"></div>
@@ -56,7 +58,11 @@ function BannerItem({ data }) {
           <span>Drama</span>
         </div>
       </div>
-      <button className="absolute left-4 bottom-[55px] px-4 py-3 bg-primary text-white rounded-lg">
+      {/* <Button>Watch Now</Button> */}
+      <button
+        className="absolute left-4 bottom-[55px] px-4 py-3 bg-primary text-white rounded-lg"
+        onClick={() => navigate(`/movies/${data.id}`)}
+      >
         Watch Now
       </button>
     </div>

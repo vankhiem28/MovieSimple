@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../button/Button";
 
 function MovieCard({ data }) {
   // console.log(data);
@@ -25,12 +26,13 @@ function MovieCard({ data }) {
         <span>{new Date(data.release_date).getFullYear()}</span>
         <span>{data.vote_average}</span>
       </div>
-      <button
+      <Button onClick={handleClickNavigate}>Watch Now</Button>
+      {/* <button
         onClick={handleClickNavigate}
         className="w-full py-3 bg-primary rounded-lg mt-2"
       >
         Watch Now
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -37,4 +37,16 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    margin: 20px 0;
+
+    .selected {
+      @apply text-primary;
+    }
+  }
 }

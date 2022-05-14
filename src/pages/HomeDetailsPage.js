@@ -2,24 +2,23 @@ import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { SwiperSlide, Swiper } from "swiper/react";
 import useSWR from "swr";
+import Banner from "../components/banner/Banner";
 import MovieCard from "../components/movie/MovieCard";
 
-import { fetcher, keyApi } from "../config";
+import { fetcher, keyApi, movieDB } from "../config";
 
 function HomeDetailsPage() {
   const { movieID } = useParams();
-  const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieID}?api_key=${keyApi}`,
-    fetcher
-  );
+  const { data, error } = useSWR(movieDB.getMovieDetails(movieID), fetcher);
 
   // https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
 
   if (!data) return null;
-  // console.log(data);
+  console.log(data);
 
   return (
     <Fragment>
+      <Banner data={data.genres} />
       <div className="page_container-l h-[600px] relative mt-5">
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
         <div
@@ -60,14 +59,12 @@ function HomeDetailsPage() {
 
 function Casts() {
   const { movieID } = useParams();
-  const { data, error } = useSWR(
-    // `https://api.themoviedb.org/3/movie/${movieID}?api_key=${keyApi}`,
-    `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${keyApi}`,
-    fetcher
-  );
+  const { data, error } = useSWR(movieDB.getMovieCredits(movieID), fetcher);
   if (!data) return null;
   const { cast } = data;
   if (!cast || cast.length < 0) return null;
+
+  console.log(cast);
 
   return (
     <Fragment>
@@ -94,12 +91,7 @@ function Casts() {
 
 function Trailer() {
   const { movieID } = useParams();
-  const { data, error } = useSWR(
-    // `https://api.themoviedb.org/3/movie/${movieID}?api_key=${keyApi}`,
-    // `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${keyApi}`,
-    `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${keyApi}`,
-    fetcher
-  );
+  const { data, error } = useSWR(movieDB.getMovieTrailer(movieID), fetcher);
   if (!data) return null;
   const { results } = data;
   if (!results || results.length < 0) return null;
@@ -130,12 +122,7 @@ function Trailer() {
 
 function MovieSimilar() {
   const { movieID } = useParams();
-  const { data, error } = useSWR(
-    // `https://api.themoviedb.org/3/movie/${movieID}?api_key=${keyApi}`,
-    // `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${keyApi}`,
-    `https://api.themoviedb.org/3/movie/${movieID}/similar?api_key=${keyApi}`,
-    fetcher
-  );
+  const { data, error } = useSWR(movieDB.getMovieSimilar(movieID), fetcher);
   if (!data) return null;
   const { results } = data;
   if (!results || results.length < 0) return null;
